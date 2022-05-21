@@ -21,3 +21,4 @@
 <script src="{{ asset('backend/js/map.shiftworker.js') }}"></script>
 <script src="{{ asset('backend/js/ResizeSensor.js') }}"></script>
 <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+@yield('custom-script')
