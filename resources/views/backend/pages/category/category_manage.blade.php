@@ -17,6 +17,7 @@
         </button>
     </div>
     <div class="card-body">
+        <div class="erroor_message"></div>
         <table class="table mg-b-0">
             <thead>
                 <tr>
@@ -81,7 +82,6 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="erroor_message"></div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="category_name">Category Name</label>
                                     <input disabled id="showCatName" class="form-control" type="text"
@@ -109,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Edit Category Modal -->
                 <div class="modal fade" id="editcategoryModel" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -121,6 +122,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <input id="editCatId" class="editId form-control" type="hidden">
                                 <div class="form-group">
                                     <label class="form-control-label" for="category_name">Category Name</label>
                                     <input id="editCatName" class="editName form-control" type="text">
@@ -149,8 +151,30 @@
                         </div>
                     </div>
                 </div>
-            </tbody>
 
+                <!-- Delete Category Modal -->
+                <div class="modal fade" id="deletecategoryModel" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger">
+                                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Category</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input class="deleteId" type="text" id="deleteCatId">
+                                <h4>Are You Sure Went To Delete This Category ?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button id="categoryDeleteSubmit" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
         </table>
     </div>
 </div>

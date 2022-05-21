@@ -115,7 +115,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->name = $request->category_name;
+        $category->tag = $request->category_tag;
+        $category->status = $request->category_status;
+        $category->description = $request->category_description;
+        $category->update();
+        if($category){
+            return response()->json([
+                'status' => '200',
+                'message' => 'Category Update Successfully'
+            ]);
+        }else{
+            return response()->json([
+                'status' => '400',
+                'message' => 'Category Update Failed'
+            ]);
+        }
     }
 
     /**
@@ -126,6 +142,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        if($category){
+            return response()->json([
+                'status' => '200',
+                'message' => 'Category Delete Successfully'
+            ]);
+        }else{
+            return response()->json([
+                'status' => '400',
+                'message' => 'Category Delete Failed'
+            ]);
+        }
     }
 }
