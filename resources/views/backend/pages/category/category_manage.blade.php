@@ -164,7 +164,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <input class="deleteId" type="text" id="deleteCatId">
+                                <input class="deleteId" type="hidden" id="deleteCatId">
                                 <h4>Are You Sure Went To Delete This Category ?</h4>
                             </div>
                             <div class="modal-footer">
