@@ -17,7 +17,7 @@
         </button>
     </div>
     <div class="card-body">
-        <div class="erroor_message"></div>
+        <div id="erroor_message"></div>
         <table class="table mg-b-0">
             <thead>
                 <tr>

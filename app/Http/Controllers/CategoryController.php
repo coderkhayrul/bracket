@@ -55,10 +55,17 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->save();
 
-        return response()->json([
-            'status' => '200',
-            'message' => 'Category Create Successfully',
-        ]);
+        if ($category) {
+            return response()->json([
+                'status' => '200',
+                'message' => 'Category Create Successfully',
+            ]);
+        }else{
+            return response()->json([
+                'status' => '404',
+                'message' => 'Category Create Failed',
+            ]);
+        }
     }
 
     /**

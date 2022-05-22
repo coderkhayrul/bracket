@@ -25,10 +25,13 @@ $(document).ready(function () {
                 description: description
             },
             success: function (response) {
+                $('#erroor_message').append('<div class="alert alert-success" role="alert">Category Create Successfully</div>');
+                $('#erroor_message').fadeOut(3000);
                 $('#createcategoryModel').modal('hide');
                 $('#createcategoryModel').find('input').val('');
                 $('#createcategoryModel').find('textarea').val('');
                 categoryAll();
+
             }
         });
     });
@@ -114,7 +117,7 @@ $(document).ready(function () {
         });
     });
 
-    // Category Get Delete
+    // Get Category Id For Delete
     jQuery(document).on('click', '#categoryDelete', function(e){
         e.preventDefault();
         var id = $(this).val();
@@ -137,7 +140,6 @@ $(document).ready(function () {
     jQuery(document).on('click', '#categoryDeleteSubmit', function(e){
         e.preventDefault();
         var id = $('.deleteId').val();
-
         $.ajax({
             url: "category/delete/"+id,
             type: "GET",
