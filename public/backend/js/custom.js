@@ -166,6 +166,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 var sl = 1;
+                $('#tbody').html('');
                 $.each(response.data, function (key, item) {
                     $('#tbody').append('<tr>\
                             <th scope="row">' + item.id + '</th>\

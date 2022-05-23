@@ -56,12 +56,12 @@
                 </li>
             </ul>
         </li>
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="{{ route('admin.blank') }}" class="br-menu-link {{ Request::is('admin/black')  == route('admin.blank') ? "active" : '' }}">
                 <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
                 <span class="menu-item-label">Blank </span>
             </a><!-- br-menu-link -->
-        </li><!-- br-menu-item -->
+        </li><!-- br-menu-item --> --}}
     </div>
     <!-- br-sideleft -->
     <!-- ########## END: LEFT PANEL ########## -->
