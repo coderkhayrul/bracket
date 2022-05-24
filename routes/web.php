@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/edit/{id}',[ CategoryController::class, 'edit' ])->name('category.edit');
         Route::post('/update/{id}',[ CategoryController::class, 'update' ])->name('category.update');
         Route::get('/delete/{id}',[ CategoryController::class, 'destroy' ])->name('category.destroy');
+    });
+
+    // SubCategory Route List
+    Route::group(['prefix' => 'sub-category'], function() {
+        Route::get('/', [SubCategoryController::class, 'index'])->name('sub-category.index');
+        Route::get('/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
+        Route::post('/', [SubCategoryController::class, 'store'])->name('sub-category.store');
     });
 });
 

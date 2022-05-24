@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <p>Student Create</p>
+        <p>Product Create</p>
         <a href="{{ route('product.index') }}" class="btn btn-sm btn-primary">All Product</a>
     </div>
     <div class="card-body">
