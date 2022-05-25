@@ -60,7 +60,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         Route::get('/', [SubCategoryController::class, 'index'])->name('sub-category.index');
         Route::get('/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
         Route::post('/', [SubCategoryController::class, 'store'])->name('sub-category.store');
+        Route::get('delete/{id}', [SubCategoryController::class, 'destroy'])->name('sub-category.delete');
     });
+
+    // SubCategory Route List
+    Route::group(['prefix' => 'items'], function() {
+        Route::get('/', [SubCategoryController::class, 'index'])->name('items.index');
+        Route::get('/create', [SubCategoryController::class, 'create'])->name('items.create');
+        Route::post('/', [SubCategoryController::class, 'store'])->name('items.store');
+        Route::get('edit/{id}', [SubCategoryController::class, 'edit'])->name('items.edit');
+        Route::post('update/{id}', [SubCategoryController::class, 'update'])->name('items.update');
+        Route::get('delete/{id}', [SubCategoryController::class, 'destroy'])->name('items.delete');
+    });
+
 });
 
 require __DIR__.'/auth.php';

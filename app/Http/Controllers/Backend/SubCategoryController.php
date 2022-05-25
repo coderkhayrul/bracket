@@ -7,6 +7,7 @@ use App\Models\Backend\SubCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -109,6 +110,13 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $data = SubCategory::where('sub_cat_id', $id)->first();
+        // return $data;
+        if (File::exists('backend/uploads/subcategory/'.$data->sub_cat_image)) {
+            File::delete('backend/uploads/subcategory/'.$data->sub_cat_image);
+            $data->delete();
+        }
+        return redirect()->route('sub-category.index');
     }
 }

@@ -52,17 +52,17 @@
                     <td class="text-center">
                         <a href="" class="btn btn-sm btn-info"><i class="icon ion-eye"></i></a>
                         <a href="" class="btn btn-sm btn-primary"><i class="icon ion-edit"></i></a>
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete">
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#SubCatdelete{{ $data['sub_cat_id'] }}">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
                 </tr>
-                <!-- Modal -->
-                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Sub Category Delete Modal -->
+                <div class="modal fade" id="SubCatdelete{{ $data['sub_cat_id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Sub Category</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <a href="{{ route('sub-category.delete',$data['sub_cat_id']) }}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                     </div>
