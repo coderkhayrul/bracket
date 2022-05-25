@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ItemController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -64,13 +65,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     });
 
     // SubCategory Route List
-    Route::group(['prefix' => 'items'], function() {
-        Route::get('/', [SubCategoryController::class, 'index'])->name('items.index');
-        Route::get('/create', [SubCategoryController::class, 'create'])->name('items.create');
-        Route::post('/', [SubCategoryController::class, 'store'])->name('items.store');
-        Route::get('edit/{id}', [SubCategoryController::class, 'edit'])->name('items.edit');
-        Route::post('update/{id}', [SubCategoryController::class, 'update'])->name('items.update');
-        Route::get('delete/{id}', [SubCategoryController::class, 'destroy'])->name('items.delete');
+    Route::group(['prefix' => 'item'], function() {
+        Route::get('/', [ItemController::class, 'index'])->name('item.index');
+        Route::get('/create', [ItemController::class, 'create'])->name('item.create');
+        Route::post('/', [ItemController::class, 'store'])->name('item.store');
+        Route::get('edit/{code}', [ItemController::class, 'edit'])->name('item.edit');
+        Route::post('update/{id}', [ItemController::class, 'update'])->name('item.update');
+        Route::get('delete/{id}', [ItemController::class, 'destroy'])->name('item.delete');
+        Route::get('image/{id}', [ItemController::class, 'gallery_destroy'])->name('item.gallery.delete');
     });
 
 });

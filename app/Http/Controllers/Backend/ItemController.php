@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
+use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class ItemController extends Controller
 {
@@ -14,7 +19,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view('backend.pages.item.index', compact('items'));
     }
 
     /**
@@ -24,7 +30,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.item.create');
     }
 
     /**
@@ -35,7 +41,40 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'item_name' => 'required',
+            'item_image' => 'required',
+        ]);
+        $item_code = uniqid();
+
+        if ($request->hasFile('item_image')) {
+            $item_image = $request->file('item_image');
+            $imageName = time() . '_' . rand(100000, 10000000) . '.' . $item_image->getClientOriginalExtension();
+            Image::make($item_image)->resize(300, 300)->save('backend/uploads/item/' . $imageName);
+
+            $id = Item::insertGetId([
+                'item_name' => $request->item_name,
+                'item_code' => $item_code,
+                'item_description' => $request->item_description,
+                'item_image' => $imageName,
+            ]);
+        }
+
+        if ($request->hasFile('gallery_image')) {
+            $gallery_image = $request->file('gallery_image');
+
+            foreach ($gallery_image as  $gImage) {
+            $imageName = 'item' . rand(100000, 10000000) . '.' . $item_image->getClientOriginalExtension();
+            Image::make($gImage)->resize(300, 300)->save('backend/uploads/item/gallery/' . $imageName);
+            $gallery = new Gallery();
+            $gallery->item_code = $item_code;
+            $gallery->gallery_image = $imageName;
+            $gallery->save();
+            }
+        }
+        Session::flash('success', 'Item Create Successfully');
+        return redirect()->back();
+
     }
 
     /**
@@ -55,9 +94,11 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($item_code)
     {
-        //
+        $data = Item::where('item_code', $item_code)->firstOrFail();
+        $gallerys= Gallery::where('item_code', $item_code)->get();
+        return view('backend.pages.item.edit', compact('data', 'gallerys'));
     }
 
     /**
@@ -81,5 +122,22 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function gallery_destroy($id)
+    {
+        $data = Gallery::where('gallery_id', $id)->first();
+        $image_path = 'backend/uploads/item/gallery/';
+        if (File::exists($image_path.$data->gallery_image)) {
+            File::delete($image_path.$data->gallery_image);
+        }
+        $data->delete();
+        return back();
     }
 }
