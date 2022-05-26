@@ -52,7 +52,7 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Item Delete</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="{{ route('product.destroy',$data->item_code) }}" class="btn btn-danger">Delete</a>
+                        <a href="{{ route('item.delete',$data->id) }}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                     </div>

@@ -2,7 +2,7 @@
 @section('admin-content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <p>Item Create</p>
+        <p>Item Update</p>
         <a href="{{ route('item.index') }}" class="btn btn-sm btn-primary">All Item</a>
     </div>
     <div class="card-body">
@@ -14,7 +14,7 @@
             <strong class="d-block d-sm-inline-block-force">{{ Session::get('success') }}</strong>
         </div>
         @endif
-        <form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('item.update',$data->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-layout form-layout-1">
                 <div class="row mg-b-25">
@@ -78,7 +78,7 @@
                                 </div>
                             </div><!-- col-8 -->
                             <div class="form-layout-footer">
-                                <button class="ml-3 btn btn-info">Update Item</button>
+                                <button type="submit" class="ml-3 btn btn-info">Update Item</button>
                             </div><!-- form-layout-footer -->
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 <figure class="overlay">
                                     <img src="{{ asset('backend/uploads/item/gallery/'.$gallery->gallery_image) }}" class="img-fluid img-thumbnail" alt="Item Image">
                                     <figcaption class="overlay-body d-flex align-items-end justify-content-center">
-                                        <a href="{{ route('item.gallery.delete',$gallery->gallery_id) }}" class="img-option-link text-danger" style="padding: 15px; font-size: 25px;">
+                                        <a href="{{ route('item.gallery.delete',$gallery->id) }}" class="img-option-link text-danger" style="padding: 15px; font-size: 25px;">
                                             <div><i class="icon ion-close"></i></div>
                                         </a>
                                     </figcaption>

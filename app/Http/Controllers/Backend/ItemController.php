@@ -64,12 +64,12 @@ class ItemController extends Controller
             $gallery_image = $request->file('gallery_image');
 
             foreach ($gallery_image as  $gImage) {
-            $imageName = 'item' . rand(100000, 10000000) . '.' . $item_image->getClientOriginalExtension();
-            Image::make($gImage)->resize(300, 300)->save('backend/uploads/item/gallery/' . $imageName);
-            $gallery = new Gallery();
-            $gallery->item_code = $item_code;
-            $gallery->gallery_image = $imageName;
-            $gallery->save();
+                $imageName = rand(100000, 10000000) . '.' . $item_image->getClientOriginalExtension();
+                Image::make($gImage)->resize(300, 300)->save('backend/uploads/item/gallery/' . $imageName);
+                $gallery = new Gallery();
+                $gallery->item_code = $item_code;
+                $gallery->gallery_image = $imageName;
+                $gallery->save();
             }
         }
         Session::flash('success', 'Item Create Successfully');
@@ -121,7 +121,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Item::find($id);
+        if (File::exists('backend/uploads/item/'.$data->item_image)) {
+            File::delete('backend/uploads/item/'.$data->item_image);
+        }
     }
 
     /**
@@ -132,12 +135,12 @@ class ItemController extends Controller
      */
     public function gallery_destroy($id)
     {
-        $data = Gallery::where('gallery_id', $id)->first();
+        $data = Gallery::find($id);
         $image_path = 'backend/uploads/item/gallery/';
         if (File::exists($image_path.$data->gallery_image)) {
             File::delete($image_path.$data->gallery_image);
         }
-        $data->delete();
-        return back();
+        Gallery::find($id)->delete();
+        return redirect()->back();
     }
 }
